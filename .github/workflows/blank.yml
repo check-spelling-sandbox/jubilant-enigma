@@ -1,0 +1,37 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-a:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: die
+        run: exit 1
+      - name: hi
+        run: |
+          echo pass
+
+  build-b:
+    runs-on: ubuntu-latest
+    steps:
+      - name: die
+        continue-on-error: true
+        run: exit 2
+      - name: die
+        continue-on-error: true
+        run: exit 3
+      - name: hi
+        run: |
+          echo pass
+
+  build:
+    runs-on: ubuntu-latest
+    needs:
+    - build-a
+    - build-b
+    steps:
+    - run: |
+        echo ::notice::hi
