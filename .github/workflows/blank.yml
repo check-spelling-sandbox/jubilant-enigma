@@ -6,7 +6,7 @@ on:
 jobs:
   build-a:
     runs-on: ubuntu-latest
-    # continue-on-error: true
+    continue-on-error: true
     steps:
       - name: die
         run: exit 1
